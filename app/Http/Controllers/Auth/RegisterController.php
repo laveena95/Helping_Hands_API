@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\MailController;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -62,12 +64,46 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+   /*  protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }*/
+
+    //newly created method to store users
+
+    public function register(Request $request)
+    {
+        $user = new User();
+        $user->name= $request->name;
+        $user->email=$request->email;
+        $user ->password = Hash::make($request->password);
+        $user ->verification_code = sha1(time());
+        $user ->save();
+
+        if($user != null)
+        {
+            //send email
+            MailController::sendVerificationMail($user->name, $user->email, $user->verification_code);
+            //redirect to dashboard
+            return redirect()->back()->with(session()->flash('alert-success', 'Your Account has been created!. Please Check Your email for the Account Verification!...'));
+        }
+
+        //show error msg
+        return redirect()->back()->with(session()->flash('alert-danger', 'Something went Wrong!!!'));
+    }
+    public function verifyUser(Request $request){
+        $verification_code = \Illuminate\Support\Facades\Request::get('code');
+        $user = User::where(['verification_code' => $verification_code])->first();
+        if($user != null){
+            $user->is_user_verified = 1;
+            $user->save();
+            return redirect()->route('login')->with(session()->flash('alert-success', 'Your account is verified. Please login!'));
+        }
+
+        return redirect()->route('login')->with(session()->flash('alert-danger', 'Invalid verification code!'));
     }
 }
