@@ -59,7 +59,7 @@
             <div class="form-group">
                   <label class="control-label col-md-3"><i class="fa fa-clock-o"></i> <span> </span> Active From</label>
                   <div class="col-md-4">
-                  <input type="date" name="active" class="form-control round-form">
+                  <input type="date" name="startup" class="form-control round-form">
                   </div>
             </div>
             <div class="form-group">

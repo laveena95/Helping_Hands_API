@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name', 190)->unique();
             $table->string('verification_code')->nullable();
             $table->integer('is_user_verified')->default(0);
-            $table->string('dob')->nullable();
+            $table->date('dob')->nullable();
             $table->string('nic')->nullable();
             $table->string('passport')->nullable();
             $table->string('job')->nullable();
