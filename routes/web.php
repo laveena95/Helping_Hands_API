@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//organization/team
+Route::get('teamDetail', 'TeamController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
