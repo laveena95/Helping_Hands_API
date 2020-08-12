@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
 use App\Team;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,30 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Team();
+        $data->name = $request->input('name');
+        $data->country = $request->input('country');
+        $data->state = $request->input('state');
+        $data->city = $request->input('city');
+        $data->lane = $request->input('lane');
+        $data->startup = $request->input('startup');
+        $data->countryS = $request->input('countryS');
+        $data->stateS = $request->input('stateS');
+        $data->cityS = $request->input('cityS');
+        $data->phone = $request->input('phone');
+        $data->mobile = $request->input('mobile');
+        $data->email = $request->input('email');
+        $data->website = $request->input('website');
+        if($request->file('proof')){
+            $file = $request->file('proof');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+            $file->move('uploads/Team/Proof/',$filename);
+            $data->cv=$filename;
+        }
+        $data->team_id=Auth::id();
+        $data->save();
+
+        return redirect()->back()->with('success','Congradulations you have Joined as Organization to Helping Hands!');
     }
 
     /**

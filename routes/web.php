@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 //organization/team
-Route::get('teamDetail', 'UserController@index');
+Route::get('teamDetail', 'teamController@index');
+Route::post('/teams', 'teamController@store');
 
 Auth::routes();
 

@@ -40,6 +40,9 @@ class UserController extends Controller
         $data->email=$request->input('email');
         $data->phone=$request->input('phone');
         $data->mobile=$request->input('mobile');
+
+        $doc = new Document();
+        $doc->title=$request->input('proof');
         $data->save();
         return redirect()->back()->with('success','Congradulations you have Joined as Organization to Helping Hands!');
     }

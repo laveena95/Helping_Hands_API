@@ -15,7 +15,7 @@
             </div>
           @endif
             <h4 class="mb"><i class="fa fa-pencil-square-o"></i> <span> </span> <b>Organization/Team Details</b></h4>
-            <form class="form-horizontal style-form" method="POST" action="/users" autocomplete="off">
+            <form class="form-horizontal style-form" method="POST" action="/teams" autocomplete="off">
             {{csrf_field()}}
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><i class="fa fa-building"></i><span> </span>Name</label>
@@ -25,12 +25,9 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><i class="fa fa-map-marker"></i><span> </span> Address</label>
-                <div class="col-sm-3">
-                    <textarea name="lane" class="form-control round-form" placeholder="Your lane with no"></textarea>
-                </div>
                 <div class="col-md-2">
-                    <select class="form-control" name="city">
-                        <option selected disabled>City</option>
+                    <select class="form-control" name="country">
+                        <option selected disabled>Country</option>
                         <option value='1'>Student</option>
                         <option value="2">Coordinator</option>
                         <option value="3">Recruiter</option>
@@ -47,13 +44,16 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control" name="country">
-                        <option selected disabled>Country</option>
+                    <select class="form-control" name="city">
+                        <option selected disabled>City</option>
                         <option value='1'>Student</option>
                         <option value="2">Coordinator</option>
                         <option value="3">Recruiter</option>
                         <option value='4'>Admin</option>
                     </select>
+                </div>
+                <div class="col-sm-3">
+                    <textarea name="lane" class="form-control round-form" placeholder="Your lane with no"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -64,9 +64,10 @@
             </div>
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label"><b><i class="fa fa-code"></i></b><span> </span> Service Area(s)</label>
+                
                 <div class="col-md-3">
-                    <select multiple class="form-control" name="city">
-                        <option selected disabled>Select from City</option>
+                    <select multiple class="form-control" name="countryS">
+                        <option selected disabled>Select from Country</option>
                         <option value='1'>Student</option>
                         <option value="2">Coordinator</option>
                         <option value="3">Recruiter</option>
@@ -74,7 +75,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select multiple class="form-control" name="state">
+                    <select multiple class="form-control" name="stateS">
                         <option selected disabled>Select from State/ Province</option>
                         <option value='1'>Student</option>
                         <option value="2">Coordinator</option>
@@ -83,8 +84,8 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select multiple class="form-control" name="country">
-                        <option selected disabled>Select from Country</option>
+                    <select multiple class="form-control" name="cityS">
+                        <option selected disabled>Select from City</option>
                         <option value='1'>Student</option>
                         <option value="2">Coordinator</option>
                         <option value="3">Recruiter</option>
